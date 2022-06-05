@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Simple Calculator</title>
+        <title>Calculator</title>
         <style>
             * {
                 padding: 0;
@@ -15,13 +15,44 @@
 
             body {
                 width: 100vw;
+                min-width: 685px;
                 height: 100vh;
-                overflow: hidden;
+                overflow: scroll;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 background-color: #ffffff;
                 font-family: sans-serif;
+            }
+
+            #info {
+                position: fixed;
+                z-index: 1;
+                background-color: black;
+                color: white;
+                top: 0;
+                left: 0;
+                border: 1px solid black;
+                height: 100vh;
+                width: 25vw;
+                min-width: 170px;
+                max-width: 320px;
+            }
+
+            #title {
+                padding-top: 10px;
+                text-align: center;
+                text-decoration: underline;
+            }
+
+            #description {
+                padding-left: 10px;
+                margin-top: 20px;
+            }
+
+            #notes, #notes p {
+                padding-left: 10px;
+                margin-top: 30px;
             }
 
             .calculator {
@@ -79,9 +110,19 @@
     </head>
 
     <body>
-        <div id="">
-
-        </div>
+        <main id="info">
+            <header id="title">
+                Web Calculator
+            </header>
+            <section id="description">
+                This is a web calculator, math to your hearts content.
+            </section>
+            <footer id="notes">
+                <p>Version 1.0 Simple Calculator</p>
+                <p>by Jude "Suede Rhino" Walker</p>
+                <p>Updates to the calculator will be coming, adding more complex functions...</p>
+            </footer>
+        </main>
 
         <div class="calculator">
             <input type="text" class="display" disabled>
