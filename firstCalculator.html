@@ -79,6 +79,10 @@
     </head>
 
     <body>
+        <div id="">
+
+        </div>
+
         <div class="calculator">
             <input type="text" class="display" disabled>
             <div class="calcButtons">
@@ -108,7 +112,37 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src=""></script>
+        
+        <script type="text/javascript">
+            //select all buttons and designate to variable
+            const buttons = document.querySelectorAll("button");
+
+            //select display and designate to variable
+            const display = document.querySelector(".display");
+
+            //event listeners listening for button click, call function calculate
+            buttons.forEach(function(buttons) {
+                buttons.addEventListener("click", calculate);
+            });
+
+            //calculate funtion, evaluating sum
+            function calculate(event) {
+                const clickedButtonValue = event.target.value;
+
+                if (clickedButtonValue === "=") {
+                //display numbers and opertors to display
+                if (display.value !== "") {
+                    display.value = eval(display.value);
+                };
+                } else if (clickedButtonValue === "C") {
+                    //clears display if clear button "C" is clicked
+                    display.value = ""
+                } else {
+                    //evaluates sum displaying answer
+                    display.value += clickedButtonValue;
+                };
+                };
+        </script>
     </body>
 
 </html>
