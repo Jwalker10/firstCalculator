@@ -8,12 +8,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Calculator</title>
         <style>
-            * {
-                padding: 0;
-                margin: 0;
-            }
 
             body {
+                margin: 0px;
+                padding: 0px;
                 width: 100vw;
                 min-width: 685px;
                 height: 100vh;
@@ -37,6 +35,7 @@
                 width: 25vw;
                 min-width: 170px;
                 max-width: 320px;
+                text-align: center;
             }
 
             #title {
@@ -51,7 +50,25 @@
             }
 
             #notes, #notes p {
-                padding-left: 10px;
+                margin-top: 30px;
+            }
+
+            #changeLog {
+                margin: 5px;
+                border: 1px solid white;
+                height: 200px;
+                overflow: scroll;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            #changeLog h3 {
+                margin-top: 30px;
+                text-decoration: underline;
+            }
+
+            #changeLog p {
                 margin-top: 30px;
             }
 
@@ -124,15 +141,26 @@
                 This is a web calculator, math to your hearts content.
             </section>
             <footer id="notes">
-                <p>Version 1.0 Simple Calculator</p>
+                <p>Version 1.2 Simple Calculator</p>
                 <p>by Jude "Suede Rhino" Walker</p>
-                <p>Updates to the calculator will be coming, adding more complex functions...</p>
+                <p>More updates to the calculator will come adding more complex functions.</p>
+                <section id="changeLog">
+                    <h3>Changelog</h3>
+                        <p class="version">version 1.0: simple calculator</p>
+                        <p class="version">version 1.2: addition of previous sum button (pre), returning last calculated sum</p>
+                </section>
             </footer>
         </main>
 
         <div class="calculator">
             <input type="text" class="display" disabled>
             <div class="calcButtons">
+                <div class="buttonRow">
+                    <button value="previousSum">pre</button>
+                    <button value=""></button>
+                    <button value=""></button>
+                    <button value=""></button>
+                </div>
                 <div class="buttonRow">
                     <button value="(" class="basicOperator">(</button>
                     <button value=")" class="basicOperator">)</button>
@@ -167,6 +195,12 @@
         </div>
         
         <script type="text/javascript">
+            // previous sum
+            /* 1 issue, currently as prevSum is stored in front end code every reload causes loss of prevSum so when pre button 
+            is pressed before any sum completed undefined is shown on display (could loose previous sum if site crash or internet down). 
+            Suggest using cookie to remember a users last input so upon return they can resume calculation. */
+            let prevSum;
+
             //select all buttons and designate to variable
             const buttons = document.querySelectorAll("button");
 
@@ -183,13 +217,18 @@
                 const clickedButtonValue = event.target.value;
 
                 if (clickedButtonValue === "=") {
-                //display numbers and opertors to display
+                //display numbers and operators to display
                 if (display.value !== "") {
+                    // defines prevSum as current sum in display value, then evaluating display value and assigning display value to answer
+                    prevSum = display.value;
                     display.value = eval(display.value);
                 };
                 } else if (clickedButtonValue === "C") {
                     //clears display if clear button "C" is clicked
                     display.value = ""
+                } else if (clickedButtonValue === "previousSum") {
+                    display.value = "";
+                    display.value += prevSum;
                 } else {
                     //evaluates sum displaying answer
                     display.value += clickedButtonValue;
